@@ -1,23 +1,9 @@
 export default class ArrayUtils {
     static pullSort(dataSet = []) {
-        let worker = [...dataSet];
-        let spliced = false;
-        let i = 0;
+        let worker = dataSet.filter((elem, index, list) =>
+            elem < list[index + 1] || !list[index + 1])
 
-        while ((i + 1) < worker.length) {
-            const item = worker[i];
-            const next = worker[i + 1];
-
-            if (item < next) {
-                i++;
-                continue;
-            }
-
-            worker.splice(i, 1);
-            spliced = true;
-        }
-
-        if (spliced) {
+        if (worker.length !== dataSet.length) {
             worker = ArrayUtils.pullSort(worker);
         }
 
